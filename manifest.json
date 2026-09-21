@@ -1,0 +1,10 @@
+{
+  "name": "Hb Colour Reader",
+  "short_name": "Hb Reader",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#8b0000",
+  "description": "Educational hemoglobin colour comparator reader.",
+  "icons": []
+}

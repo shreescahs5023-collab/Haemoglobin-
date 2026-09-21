@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8b0000">
+  <meta name="description" content="Educational hemoglobin colour comparator reader for MLT students and laboratory teaching.">
+  <title>Hb Colour Reader – Educational Comparator</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="app-header">
+  <div>
+    <h1>Hb Colour Reader</h1>
+    <p>Hemoglobin colour comparator • Educational / screening tool</p>
+  </div>
+  <button id="printBtn" class="secondary">Print Report</button>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h2>1. Sample details</h2>
+    <div class="grid">
+      <label>Sample / Patient ID
+        <input id="sampleId" type="text" placeholder="Optional">
+      </label>
+      <label>Sex
+        <select id="sex">
+          <option value="unknown">Not selected</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </label>
+      <label>Date
+        <input id="reportDate" type="date">
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. Upload the Hb colour sample</h2>
+    <p class="hint">
+      Upload a clear photograph of the blood-stained paper/sample. Keep the lighting neutral,
+      avoid flash/glare and place the sample beside a white background if possible.
+    </p>
+    <input id="imageInput" type="file" accept="image/*" capture="environment">
+    <div class="canvas-wrap">
+      <canvas id="sampleCanvas" aria-label="Uploaded sample. Tap the blood colour to measure."></canvas>
+      <div id="canvasPlaceholder">Your uploaded image will appear here.</div>
+    </div>
+    <p id="sampleInstruction" class="hint">After upload, tap the centre of the blood colour.</p>
+    <div class="controls">
+      <label>Sampling radius
+        <input id="radius" type="range" min="5" max="50" value="18">
+        <span id="radiusValue">18 px</span>
+      </label>
+      <button id="resetSample" class="secondary" disabled>Clear sample</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3. Comparator result</h2>
+    <div id="resultEmpty" class="empty">Upload an image and tap the blood colour to calculate an approximate comparator-equivalent Hb.</div>
+    <div id="result" class="hidden">
+      <div class="result-main">
+        <div>
+          <div class="small-label">Estimated comparator-equivalent Hb</div>
+          <div id="hbValue" class="big-number">—</div>
+          <div id="percentValue" class="percent">—</div>
+        </div>
+        <div id="classification" class="badge">—</div>
+      </div>
+
+      <div class="result-grid">
+        <div><span>Measured RGB</span><strong id="rgbValue">—</strong></div>
+        <div><span>Nearest comparator</span><strong id="nearestValue">—</strong></div>
+        <div><span>Distance</span><strong id="distanceValue">—</strong></div>
+        <div><span>Sex-specific interpretation</span><strong id="sexInterpretation">—</strong></div>
+      </div>
+
+      <div class="note">
+        <strong>Important:</strong> This app estimates colour against the uploaded comparator reference.
+        It is not a laboratory hemoglobin measurement and must not replace a validated Hb method
+        such as a hematology analyzer or spectrophotometric/cyanmethemoglobin method.
+        Image lighting, camera white balance, paper type, staining volume and glare can change the result.
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>4. Reference comparator chart</h2>
+    <p class="hint">Reference values transcribed from the uploaded chart.</p>
+    <div class="reference-grid" id="referenceGrid"></div>
+    <img class="reference-image" src="assets/hb-comparator-reference.jpg" alt="Uploaded hemoglobin colour comparator reference chart">
+  </section>
+
+  <section class="card report-card" id="reportCard">
+    <h2>5. Report</h2>
+    <div id="reportContent">
+      <p class="hint">A report will appear after a colour is measured.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Hb Colour Reader • Offline-friendly • Designed for MLT education and demonstration</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
